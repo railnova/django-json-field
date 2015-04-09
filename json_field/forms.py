@@ -14,6 +14,9 @@ class JSONFormField(fields.Field):
         self.evaluate = kwargs.pop('evaluate', False)
         self.encoder_kwargs = kwargs.pop('encoder_kwargs', {'cls':JSONEncoder})
         self.decoder_kwargs = kwargs.pop('decoder_kwargs', {'cls':JSONDecoder, 'parse_float':Decimal})
+        if 'max_length' in kwargs.keys():
+            del kwargs['max_length']
+
         super(JSONFormField, self).__init__(*args, **kwargs)
 
     def clean(self, value):
